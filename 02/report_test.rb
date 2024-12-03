@@ -31,4 +31,23 @@ class ReportTest < Minitest::Test
 
     assert report.safe?
   end
+
+  def test_dampening_with_one_bad_level
+    levels = [1, 2, 3, 4, 9]
+    report = Report.new(levels)
+
+    assert report.safe?
+
+    levels = [5, 1, 3, 4, 5]
+    report = Report.new(levels)
+
+    assert report.safe?
+  end
+
+  def test_dampening_with_two_bad_levels
+    levels = [1, 2, 3, 9, 9]
+    report = Report.new(levels)
+
+    refute report.safe?
+  end
 end

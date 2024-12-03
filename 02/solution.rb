@@ -9,5 +9,4 @@ safe_levels = reports.reduce(0) do |acc, report|
   Report.new(rep).safe? ? acc + 1 : acc
 end
 
-
-puts "Part 1 safe levels: #{safe_levels}"
+puts "Safe levels: #{safe_levels}"
