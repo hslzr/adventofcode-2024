@@ -1,5 +1,3 @@
-require "debug"
-
 class Input
   attr_reader :lines
   def initialize(raw_input)
