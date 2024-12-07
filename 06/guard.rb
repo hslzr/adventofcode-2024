@@ -1,16 +1,19 @@
 class Guard
-  attr_reader :position, :direction, :map, :positions_visited
+  attr_reader :position, :direction, :map, :positions_visited, :log
 
-  def initialize(position:, direction:, map:)
+  def initialize(position:, direction:, map:, log: nil)
     @position = position
     @direction = direction
     @map = map
     @positions_visited = 0
+    @log = log
     
     puts "Guard initialized at #{position} facing #{direction}"
   end
 
   def advance
+    log.record(position) if log
+
     previous_position = position.dup
     @position = next_position
 
@@ -34,6 +37,7 @@ class Guard
                  when :down then :left
                  when :left then :up
                  end
+    log.record_turn(@position, @direction) if log
   end
 
   def next_position
